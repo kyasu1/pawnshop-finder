@@ -29,7 +29,7 @@ if (!isProduction) {
   });
 }
 
-// It is important to catch any errors  from the proxy or the
+// It is important to catch any errors from the proxy or the
 // server will crash. An example of this is connectiong to the
 // server when webpack is building.
 proxy.on('error', function(e) {
@@ -37,5 +37,5 @@ proxy.on('error', function(e) {
 });
 
 app.listen(port, function() {
-  console.log('Server running on port' + port);
+  console.log('Server running on port ' + port);
 });

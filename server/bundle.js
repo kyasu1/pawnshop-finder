@@ -1,6 +1,6 @@
-var webpack = require('webpack');
+var Webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var webpackConfig = require('./../webpack.config.js');
+var WebpackConfig = require('./../webpack.config.js');
 var path = require('path');
 var fs = require('fs');
 var mainPath = path.resolve(__dirname, '..', 'app', 'main.cjsx');
@@ -8,7 +8,7 @@ var mainPath = path.resolve(__dirname, '..', 'app', 'main.cjsx');
 module.exports = function() {
   // First we fire up Webpack an pass in the configuration we
   // created.
-  var compiler = webpack(webpackConfig, function() {
+  var compiler = Webpack(WebpackConfig, function() {
     // Due to a bug with the style-Loader we have to "touch" a file
     // to force a rebundle after the initial one. Kudos to my collegue
     // Stephan for thie one
@@ -17,10 +17,10 @@ module.exports = function() {
   });
 
   var bundler = new WebpackDevServer(compiler, {
-    // We need to tell Webpack to server out bundled application
+    // We need to tell Webpack to serve out bundled application
     // from the build path. When proxying:
     // http://localhost:3000/build -> http://localhost:8080/build
-    publicPath: 'build/',
+    publicPath: '/build/',
 
     // Configure hot replacement
     hot: true,
