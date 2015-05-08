@@ -7,7 +7,8 @@ var mainPath = path.resolve(__dirname, 'app', 'main.cjsx');
 var config = {
   // Makes sure errors in console mapt to the correct file
   // and Line number
-  devtool: 'eval',
+  // devtool: 'eval',
+  devtool: 'source-map',
   entry: [
     // For hot style updates
     'webpack/hot/dev-server',
@@ -15,9 +16,11 @@ var config = {
     // The script refreshing the browser on none hot updates
     'webpack-dev-server/client?http://localhost:8080',
 
+    'bootstrap-sass/assets/javascripts/bootstrap',
+    
     // Our application
-    mainPath],
-
+    mainPath
+  ],
   output: {
     // We need to give Webpack a path. It does not actually need it,
     // because files are kept in memory in webpack-dev-server, but an
@@ -54,13 +57,27 @@ var config = {
     {
       test: /\.css$/,
       loader: 'style!css'
+    },
+
+    {
+      test: /\.scss$/,
+      loader: "style!css!sass?includePaths[]=" + 
+        path.resolve(__dirname, "./node_modules/bootstrap-sass/assets/stylesheets/")
+      // loader: "style!css!sass"
+    },
+
+    {
+      test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2$|\.eot$|\.ttf$/, loader: "file"
     }
     ]
   },
 
   // We have to manually add the Hot Replacement plugin when running
   // from Node
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 };
 
 module.exports = config;

@@ -1,19 +1,27 @@
 var Webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var WebpackConfig = require('./../webpack.config.js');
-var path = require('path');
-var fs = require('fs');
-var mainPath = path.resolve(__dirname, '..', 'app', 'main.cjsx');
+var webpackConfig = require('./../webpack.config.js');
+// var path = require('path');
+// var fs = require('fs');
+// var mainPath = path.resolve(__dirname, '..', 'app', 'main.cjsx');
 
 module.exports = function() {
   // First we fire up Webpack an pass in the configuration we
   // created.
-  var compiler = Webpack(WebpackConfig, function() {
-    // Due to a bug with the style-Loader we have to "touch" a file
-    // to force a rebundle after the initial one. Kudos to my collegue
-    // Stephan for thie one
-    fs.writeFileSync(mainPath, fs.readFileSync(mainPath).toString());
-    console.log('Project is ready!');
+  var bundlerStart = null;
+  var compiler = Webpack(webpackConfig);
+
+  // We give notice in the terminal when it starts bundling and 
+  // set the time it started
+  compiler.plugin('compile', function() {
+    console.log ('Bundling...');
+    bundleStart = Date.now();
+  });
+
+  // We also give notice when it is done compiling, including the
+  // time it took. Nice to have
+  compiler.plugin('done', function(){
+    console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!');
   });
 
   var bundler = new WebpackDevServer(compiler, {
@@ -22,6 +30,8 @@ module.exports = function() {
     // http://localhost:3000/build -> http://localhost:8080/build
     publicPath: '/build/',
 
+    inline: true,
+    
     // Configure hot replacement
     hot: true,
 
