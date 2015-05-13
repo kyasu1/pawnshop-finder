@@ -10,9 +10,13 @@ class ShopList extends React.Component
     Actions.selectShop(e)
 
   render: =>
-    shops = @props.shops.map (shop, index) =>
-      active = shop is @props.shop
-      <ShopListItem key={index} shop={shop} active={active} onClick={@handleClick} />
+    shops = []
+    if @props.result.length > 0
+      shops = @props.result.map (shop, index) =>
+        active = shop is @props.shop
+        <ShopListItem key={index} shop={shop} active={active} onClick={@handleClick} />
+    else
+      shops = null
 
     <div>
       <ul>

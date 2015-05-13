@@ -52,7 +52,6 @@ class App extends React.Component
     @stream = @observableGetCurrentPosition()
     @stream.subscribe(
       (pos) =>
-        console.log 'componentDidMount: ', pos
         @setState
           current: pos
       (err) ->
