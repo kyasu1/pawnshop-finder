@@ -1,23 +1,29 @@
-React = require('react')
-GMaps = require('./components/GMaps')
+React       = require('react')
+Rx          = require('rx')
 
 require './scss/main.scss'
 
-maps = google.maps
-evt = maps.event
-Rx = require('rx')
-ShopData = require('./ShopData')
+ShopData    = require('./ShopData')
+ShopStore   = require('./stores/ShopStore')
+
+GMaps       = require('./components/GMaps')
+ShopList    = require('./components/ShopList')
+App         = require('./components/App')
 
 ShopData.init()
 
-evt.addListenerAsObservable = (instance, eventName) ->
+google.maps.event.addListenerAsObservable = (instance, eventName) ->
   Rx.Observable.create (observer) ->
-    listener = evt.addListener(instance, eventName, (eventObject) =>
+    listener = google.maps.event.addListener(instance, eventName, (eventObject) =>
       observer.onNext(eventObject)
     )
 
     return () ->
-      evt.removeListener(listener)
+      google.maps.event.removeListener(listener)
+
+ShopStore.subject.subscribe (state) ->
+  React.render <ShopList {...state} />, document.getElementById('shop_list')
+  React.render <App {...state} />, document.getElementById('main')
 
 # obserbableWatchPosition = ->
 #   Rx.Observable.create (observer) -> 
@@ -47,73 +53,6 @@ evt.addListenerAsObservable = (instance, eventName) ->
 # )
 
 
-current = null
-if navigator.geolocation
-  navigator.geolocation.getCurrentPosition (pos) =>
-    current = new google.maps.LatLng pos.coords.latitude, pos.coords.longitude
-else
-  current = new google.maps.LatLng 35.698363, 139.756125
-
-selected = null
-
-class App extends React.Component
-  constructor: ->
-    @state =
-      current: null
-
-  obserbableWatchPosition: ->
-    Rx.Observable.create (observer) -> 
-      id = navigator.geolocation.watchPosition(
-        (pos) =>
-          observer.onNext pos
-        (err) =>
-          observer.onError err
-      )
-      return () =>
-        navigator.geolocation.clearWatch(id)
-    .throttle(250)
-    .map (pos) ->
-      new google.maps.LatLng pos.coords.latitude, pos.coords.longitude
-    .startWith new google.maps.LatLng 35.698363, 139.756125
-    .publish()
-    .refCount()
-
-  observableGetCurrentPosition: ->
-    Rx.Observable.create (observer) -> 
-      navigator.geolocation.getCurrentPosition(
-        (pos) =>
-          observer.onNext pos
-        (err) =>
-          observer.onError err
-        () ->
-          console.log "onComplete"
-      )
-    .map (pos) ->
-      new google.maps.LatLng pos.coords.latitude, pos.coords.longitude
- 
-  componentDidMount: =>
-    @stream = @observableGetCurrentPosition()
-    @stream.subscribe(
-      (pos) =>
-        console.log 'componentDidMount: ', pos
-        @setState
-          current: pos
-      (err) ->
-        console.log "ERROR: ", err
-    )
-
-  componentWillUnmount: =>
-    @stream.dispose()
-
-  render: =>
-    <GMaps current={@state.current} shops={@props.shops} selected={@props.shop}/>
-
-ShopStore = require('./stores/ShopStore')
-ShopList = require('./components/ShopList')
-
-ShopStore.subject.subscribe (state) ->
-  React.render <ShopList {...state} />, document.getElementById('shop_list')
-  React.render <App {...state} />, document.getElementById('main')
   
 # source = Rx.Observable
 #   .range(1, 3)

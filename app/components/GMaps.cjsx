@@ -62,17 +62,9 @@ class GMaps extends React.Component
       map: @map
 
   render: =>
-    <div className="container">
-      <header>
-        THIS IS GOOGLE MAPS EXAMPLE
-      </header>
-      <section>
-        <div id="map-canvas">
-        </div>
-      </section>
-      <footer>
-        COPYRIGHT @ YASUYUKI KOMATSUBARA
-      </footer>
-    </div>
+    <section>
+      <div id="map-canvas">
+      </div>
+    </section>
 
 module.exports = GMaps

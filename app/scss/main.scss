@@ -24,6 +24,14 @@ html, body, #main {
 
 header {
   height: 50px;
+  div {
+    display: table-cell;
+    vertical-align: middle;
+    div {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 section {
@@ -34,6 +42,15 @@ footer {
   position: absolute;
   height: 50px;
   bottom: 0px;
+  div {
+    display: table-cell;
+    vertical-align: middle;
+    div {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+  }
 }
 
 #shop_list {
