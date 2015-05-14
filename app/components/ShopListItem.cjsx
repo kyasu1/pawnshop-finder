@@ -6,6 +6,7 @@ class ShopListItem extends React.Component
 
   render: =>
     shop = null
+    className = "list-group-item "
     if @props.active
       shop =
         <div>
@@ -13,14 +14,15 @@ class ShopListItem extends React.Component
           <p>{@props.shop.prefecture + @props.shop.city + @props.shop.street}</p>
           <p>{@props.shop.tel}</p>
         </div>
+      className += " active"
     else
       shop =
         <div>
           <p>{@props.shop.title}</p>
         </div>
 
-    <li onClick={@handleClick}>
+    <a href="#" onClick={@handleClick} className={className}>
       {shop}
-    </li>
+    </a>
 
 module.exports = ShopListItem

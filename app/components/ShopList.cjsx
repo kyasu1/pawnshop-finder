@@ -19,9 +19,9 @@ class ShopList extends React.Component
       shops = null
 
     <div>
-      <ul>
+      <div className="list-group">
         {shops}
-      </ul>
+      </div>
     </div>
 
 module.exports = ShopList

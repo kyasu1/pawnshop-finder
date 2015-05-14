@@ -7,6 +7,7 @@ state =
   shop: null
   shops: []
   result: []
+  text: ''
 
 search_by_keyword = (text) ->
   if text is '' then return []
@@ -41,12 +42,14 @@ Actions.subjects.selectShopSubject.subscribe (payload) ->
 
   subject.onNext(state)
 
-Actions.subjects.searchByKeywordSubjct.subscribe (payload) ->
-  result = search_by_keyword(payload.data)
-  state = update state,
-    $merge:
-      result: result
-  subject.onNext(state)
+Actions.subjects.searchByKeywordSubjct
+  .subscribe (payload) =>
+    result = search_by_keyword(payload.value)
+    state = update state,
+      $merge:
+        result: result
+        text: payload.value
+    subject.onNext(state)
 
 subject.onNext(state)
 

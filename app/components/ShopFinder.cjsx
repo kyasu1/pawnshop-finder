@@ -1,11 +1,16 @@
 React = require('react')
 ShopSearch = require('./ShopSearch')
 ShopList = require('./ShopList')
+SearchByPrefecture = require('./SearchByPrefecture')
 
 class ShopFinder extends React.Component
   render: =>
     <div>
-      <ShopSearch {...@props} />
+      <div className="panel-heading text-center">質屋検索</div>
+      <div className="panel-body">
+        <ShopSearch {...@props} />
+        <SearchByPrefecture {...@props} />
+      </div>
       <ShopList {...@props} />
     </div>
 

@@ -16,6 +16,6 @@ module.exports =
     subjects.selectShopSubject.onNext
       data: shop
 
-  searchByKeyword: (text) ->
+  searchByKeyword: (value) ->
     subjects.searchByKeywordSubjct.onNext
-      data: text
+      value: value
