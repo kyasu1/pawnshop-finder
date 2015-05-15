@@ -1,12 +1,14 @@
 Rx        = require('rx')
 update    = require('react/lib/update')
 Actions   = require('../actions/ShopActions')
+Immutable = require('immutable')
+
 subject   = new Rx.ReplaySubject(1)
 
 state =
   shop: null
-  shops: []
-  result: []
+  shops: Immutable.List()
+  result: Immutable.List()
   text: ''
 
 search_by_keyword = (text) ->
@@ -22,7 +24,7 @@ search_by_id = (id) ->
 Actions.subjects.getShopsSubject.subscribe (payload) ->
   state = update state,
     $merge:
-      shops: payload.data
+      shops: Immutable.fromJS(payload.data)
   subject.onNext(state)
 
 Actions.subjects.selectShopSubject.subscribe (payload) ->

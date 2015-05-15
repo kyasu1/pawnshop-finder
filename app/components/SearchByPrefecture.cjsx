@@ -1,9 +1,10 @@
 React = require 'react'
 Select = require('./Select')
+Actions = require('../actions/ShopActions')
 
 class SelectPrefecture extends React.Component
   render: =>
-    <Select name="pref_name" className="form-control">
+    <Select name="pref_name" className="form-control" action={Actions.searchByPrefecture}>
       <option value="" selected>都道府県</option>
       <optgroup label="北海道・東北">
         <option value="北海道">北海道</option>

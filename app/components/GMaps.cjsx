@@ -55,6 +55,14 @@ class GMaps extends React.Component
 
     if @props.selected isnt nextProps.selected
       @map.setCenter new google.maps.LatLng nextProps.selected.lat, nextProps.selected.lng
+      @map.setZoom 15
+
+    if @props.result isnt nextProps.result
+      # compute the new center based on the list
+      lat_max = nextProps.result.reduce (prev, curr) ->
+        prev.lat > curr.lat
+
+      console.log "lat_max: ", lat_max
 
   placeMarker: (location) ->
     marker = new google.maps.Marker
