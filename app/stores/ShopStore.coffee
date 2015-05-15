@@ -15,42 +15,35 @@ search_by_keyword = (text) ->
   if text is '' then return []
 
   state.shops.filter (item, index) ->
-    true if item.title.indexOf(text) >= 0 or item.prefecture.indexOf(text) >= 0
+    true if item.get('title').indexOf(text) >= 0 or item.get('prefecture').indexOf(text) >= 0
 
 search_by_id = (id) ->
   state.shops.filter (item) ->
-    true if item.id is id
+    true if item.get('id') is id
 
 Actions.subjects.getShopsSubject.subscribe (payload) ->
-  state = update state,
-    $merge:
-      shops: Immutable.fromJS(payload.data)
+  state.shops = Immutable.fromJS(payload.data).toList()
+
   subject.onNext(state)
 
 Actions.subjects.selectShopSubject.subscribe (payload) ->
-  shop_in_result = state.result.filter (item) ->
-    true if item.id is payload.data.id
+  shop_in_result = state.result.filter (shop) ->
+    shop.get('id') is payload.shop.get('id')
 
-  if shop_in_result[0]?
-    state = update state,
-      $merge:
-        shop: payload.data
+  if shop_in_result.size > 0
+    state.shop = payload.shop
   else
-    result = search_by_id(payload.data.id)
-    state = update state,
-      $merge:
-        shop: payload.data
-        result: result
+    result = search_by_id(payload.shop.get('id'))
+    state.shop = payload.shop
+    state.result = result
 
   subject.onNext(state)
 
 Actions.subjects.searchByKeywordSubjct
   .subscribe (payload) =>
     result = search_by_keyword(payload.value)
-    state = update state,
-      $merge:
-        result: result
-        text: payload.value
+    state.result = result
+
     subject.onNext(state)
 
 subject.onNext(state)

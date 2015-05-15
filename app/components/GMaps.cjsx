@@ -25,36 +25,44 @@ class GMaps extends React.Component
       position: @map.getCenter()
       map: @map
 
-    @shopsSource = Rx.Observable.fromArray(@props.shops)
-      .map (shop) =>
-        shop.marker = new google.maps.Marker
-          map: @map
-          position: new google.maps.LatLng shop.lat, shop.lng
+    # @props.shops.map (shop) =>
+    #     shop.marker = new google.maps.Marker
+    #       map: @map
+    #       position: new google.maps.LatLng shop.lat, shop.lng
 
-        source = Rx.Observable.create (observer) =>
-          listener = google.maps.event.addListener shop.marker, 'click', (eventObject) =>
-            observer.onNext(shop)
-          return ->
-            google.maps.event.removeListener(listener)
+    #     source = Rx.Observable.create (observer) =>
+    #       listener = google.maps.event.addListener shop.marker, 'click', (eventObject) =>
+    #         observer.onNext(shop)
+    #       return ->
+    #         google.maps.event.removeListener(listener)
 
-        shop.marker.subscribe = source.subscribe(
-          (shop) =>
-            Actions.selectShop(shop)
-        )
-    
+    #     shop.marker.subscribe = source.subscribe(
+    #       (shop) =>
+    #         Actions.selectShop(shop)
+    #     )
 
-    @shopsSource.subscribe()
+    @markers = @props.shops.map (shop) =>
+      marker = new google.maps.Marker
+        map: @map
+        position: new google.maps.LatLng shop.get('lat'), shop.get('lng')
 
+      source = Rx.Observable.create (observer) =>
+        listener = google.maps.event.addListener marker, 'click', (eventObject) =>
+          observer.onNext(shop)
+        return ->
+          google.maps.event.removeListener(listener)
 
-  componentWillUnmount: =>
-    @shopsSource.dispose()
-
+      marker.subscribe = source.subscribe(
+        (shop) =>
+          Actions.selectShop(shop)
+      )
+      marker
 
   componentWillUpdate: (nextProps, nextState) =>
     @current.setPosition nextProps.current if @props.current isnt nextProps.current
 
     if @props.selected isnt nextProps.selected
-      @map.setCenter new google.maps.LatLng nextProps.selected.lat, nextProps.selected.lng
+      @map.setCenter new google.maps.LatLng nextProps.selected.get('lat'), nextProps.selected.get('lng')
       @map.setZoom 15
 
     if @props.result isnt nextProps.result

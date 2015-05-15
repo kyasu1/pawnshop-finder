@@ -9,12 +9,13 @@ module.exports =
   subjects: subjects
 
   getShopsSubject: ->
+    data = JSON.parse(localStorage.getItem('shops'))
     subjects.getShopsSubject.onNext
-      data: JSON.parse(localStorage.getItem('shops'))
+      data: data
 
   selectShop: (shop) ->
     subjects.selectShopSubject.onNext
-      data: shop
+      shop: shop
 
   searchByKeyword: (value) ->
     subjects.searchByKeywordSubjct.onNext

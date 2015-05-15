@@ -10,15 +10,15 @@ class ShopListItem extends React.Component
     if @props.active
       shop =
         <div>
-          <p>{@props.shop.title}</p>
-          <p>{@props.shop.prefecture + @props.shop.city + @props.shop.street}</p>
-          <p>{@props.shop.tel}</p>
+          <p>{@props.shop.get('title')}</p>
+          <p>{@props.shop.get('prefecture') + @props.shop.get('city') + @props.shop.get('street')}</p>
+          <p>{@props.shop.get('tel')}</p>
         </div>
       className += " active"
     else
       shop =
         <div>
-          <p>{@props.shop.title}</p>
+          <p>{@props.shop.get('title')}</p>
         </div>
 
     <a href="#" onClick={@handleClick} className={className}>
