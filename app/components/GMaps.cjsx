@@ -9,6 +9,30 @@ class GMaps extends React.Component
         zoom: 15
         center: new google.maps.LatLng(35.866426, 139.779734)
 
+  setMarkers: (data) =>
+    @markers = data.map (shop) =>
+      marker = new google.maps.Marker
+        map: @map
+        position: new google.maps.LatLng shop.get('lat'), shop.get('lng')
+
+      source = Rx.Observable.create (observer) =>
+        listener = google.maps.event.addListener marker, 'click', (eventObject) =>
+          observer.onNext(shop)
+        return ->
+          google.maps.event.removeListener(listener)
+
+      marker.subscribe = source.subscribe(
+        (shop) =>
+          Actions.selectShop(shop)
+      )
+      marker
+
+  toggleVisibleMarkers: (visible) =>
+    affected = @markers.filter (result) =>
+
+    @markers.map (marker) =>
+      marker.setVisilbe(visible)
+
   componentDidMount: =>
     mapOptions = {}
     if @props.current?
@@ -41,36 +65,26 @@ class GMaps extends React.Component
     #         Actions.selectShop(shop)
     #     )
 
-    @markers = @props.shops.map (shop) =>
-      marker = new google.maps.Marker
-        map: @map
-        position: new google.maps.LatLng shop.get('lat'), shop.get('lng')
-
-      source = Rx.Observable.create (observer) =>
-        listener = google.maps.event.addListener marker, 'click', (eventObject) =>
-          observer.onNext(shop)
-        return ->
-          google.maps.event.removeListener(listener)
-
-      marker.subscribe = source.subscribe(
-        (shop) =>
-          Actions.selectShop(shop)
-      )
-      marker
+    @setMarkers @props.shops
 
   componentWillUpdate: (nextProps, nextState) =>
     @current.setPosition nextProps.current if @props.current isnt nextProps.current
 
-    if @props.selected isnt nextProps.selected
-      @map.setCenter new google.maps.LatLng nextProps.selected.get('lat'), nextProps.selected.get('lng')
+    if @props.shop isnt nextProps.shop
+      @map.setCenter new google.maps.LatLng nextProps.shop.get('lat'), nextProps.shop.get('lng')
       @map.setZoom 15
 
-    if @props.result isnt nextProps.result
-      # compute the new center based on the list
-      lat_max = nextProps.result.reduce (prev, curr) ->
-        prev.lat > curr.lat
+    if nextProps.result? and nextProps.size > 0 and @props.result isnt nextProps.result
+      # @clearMarkers()
+      # @setMarkers nextProps.result
 
-      console.log "lat_max: ", lat_max
+      # compute the new center based on the list
+      max_lat = nextProps.result.reduce (p, c) -> if p.get('lat') > c.get('lat') then p else c
+      max_lng = nextProps.result.reduce (p, c) -> if p.get('lng') > c.get('lng') then p else c
+      min_lat = nextProps.result.reduce (p, c) -> if p.get('lat') < c.get('lat') then p else c
+      min_lng = nextProps.result.reduce (p, c) -> if p.get('lng') < c.get('lng') then p else c
+
+      console.log "max_lat: ", max_lat.get('lat')
 
   placeMarker: (location) ->
     marker = new google.maps.Marker

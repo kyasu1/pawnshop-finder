@@ -64,7 +64,7 @@ class App extends React.Component
   render: =>
     <div className="container">
       <Header />
-      <GMaps current={@state.current} shops={@props.shops} selected={@props.shop}/>
+      <GMaps current={@state.current} {...@props}/>
       <Footer />
     </div>
 module.exports = App

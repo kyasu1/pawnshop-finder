@@ -5,7 +5,13 @@ Immutable = require('immutable')
 
 subject   = new Rx.ReplaySubject(1)
 
-state =
+# state =
+#   shop: null
+#   shops: Immutable.List()
+#   result: Immutable.List()
+#   text: ''
+
+state = Immutable.Map
   shop: null
   shops: Immutable.List()
   result: Immutable.List()
@@ -22,8 +28,9 @@ search_by_id = (id) ->
     true if item.get('id') is id
 
 Actions.subjects.getShopsSubject.subscribe (payload) ->
-  state.shops = Immutable.fromJS(payload.data).toList()
-
+  # state.shops = Immutable.fromJS(payload.data).toList()
+  # state = state.setIn ['shops'], Immutable.fromJS(payload.data).toList()
+  state = state.set 'shops', Immutable.fromJS(payload.data).toList()
   subject.onNext(state)
 
 Actions.subjects.selectShopSubject.subscribe (payload) ->
