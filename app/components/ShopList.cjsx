@@ -10,9 +10,8 @@ class ShopList extends React.Component
     Actions.selectShop(e)
 
   render: =>
-    console.log @props
     shops = []
-    if @props.getIn(['result']).size > 0
+    if @props.result.size > 0
       shops = @props.result.map (shop, index) =>
         active = shop is @props.shop
         <ShopListItem key={index} shop={shop} active={active} onClick={@handleClick} />

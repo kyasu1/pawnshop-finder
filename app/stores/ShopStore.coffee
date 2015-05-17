@@ -11,7 +11,7 @@ subject   = new Rx.ReplaySubject(1)
 #   result: Immutable.List()
 #   text: ''
 
-state = Immutable.Map
+state = 
   shop: null
   shops: Immutable.List()
   result: Immutable.List()
@@ -29,21 +29,20 @@ search_by_id = (id) ->
 
 Actions.subjects.getShopsSubject.subscribe (payload) ->
   # state.shops = Immutable.fromJS(payload.data).toList()
-  # state = state.setIn ['shops'], Immutable.fromJS(payload.data).toList()
-  state = state.set 'shops', Immutable.fromJS(payload.data).toList()
+  state.shops = payload.data
   subject.onNext(state)
 
 Actions.subjects.selectShopSubject.subscribe (payload) ->
   shop_in_result = state.result.filter (shop) ->
     shop.get('id') is payload.shop.get('id')
 
-  if shop_in_result.size > 0
-    state.shop = payload.shop
-  else
-    result = search_by_id(payload.shop.get('id'))
-    state.shop = payload.shop
-    state.result = result
+  if shop_in_result.size is -1
+    state.result = search_by_id(payload.shop.get('id'))
 
+  state.shop = payload.shop.set('selected', true)
+
+  console.log state.shop
+  console.log state.shop.toJS()
   subject.onNext(state)
 
 Actions.subjects.searchByKeywordSubjct

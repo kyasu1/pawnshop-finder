@@ -27,12 +27,6 @@ class GMaps extends React.Component
       )
       marker
 
-  toggleVisibleMarkers: (visible) =>
-    affected = @markers.filter (result) =>
-
-    @markers.map (marker) =>
-      marker.setVisilbe(visible)
-
   componentDidMount: =>
     mapOptions = {}
     if @props.current?
@@ -49,23 +43,7 @@ class GMaps extends React.Component
       position: @map.getCenter()
       map: @map
 
-    # @props.shops.map (shop) =>
-    #     shop.marker = new google.maps.Marker
-    #       map: @map
-    #       position: new google.maps.LatLng shop.lat, shop.lng
-
-    #     source = Rx.Observable.create (observer) =>
-    #       listener = google.maps.event.addListener shop.marker, 'click', (eventObject) =>
-    #         observer.onNext(shop)
-    #       return ->
-    #         google.maps.event.removeListener(listener)
-
-    #     shop.marker.subscribe = source.subscribe(
-    #       (shop) =>
-    #         Actions.selectShop(shop)
-    #     )
-
-    @setMarkers @props.shops
+    # @setMarkers @props.shops
 
   componentWillUpdate: (nextProps, nextState) =>
     @current.setPosition nextProps.current if @props.current isnt nextProps.current
@@ -74,9 +52,14 @@ class GMaps extends React.Component
       @map.setCenter new google.maps.LatLng nextProps.shop.get('lat'), nextProps.shop.get('lng')
       @map.setZoom 15
 
-    if nextProps.result? and nextProps.size > 0 and @props.result isnt nextProps.result
+    if nextProps.result? and nextProps.result.size > 0 and @props.result isnt nextProps.result
       # @clearMarkers()
       # @setMarkers nextProps.result
+
+      @props.result.map (shop) =>
+        shop.toJS().marker.setMap(null)
+      nextProps.result.map (shop) =>
+        shop.toJS().marker.setMap(@map)
 
       # compute the new center based on the list
       max_lat = nextProps.result.reduce (p, c) -> if p.get('lat') > c.get('lat') then p else c
@@ -84,12 +67,11 @@ class GMaps extends React.Component
       min_lat = nextProps.result.reduce (p, c) -> if p.get('lat') < c.get('lat') then p else c
       min_lng = nextProps.result.reduce (p, c) -> if p.get('lng') < c.get('lng') then p else c
 
-      console.log "max_lat: ", max_lat.get('lat')
+      cnt_lat = (max_lat.toJS().lat + min_lat.toJS().lat) * 0.5
+      cnt_lng = (max_lng.toJS().lng + min_lng.toJS().lng) * 0.5
 
-  placeMarker: (location) ->
-    marker = new google.maps.Marker
-      position: location
-      map: @map
+      @map.setCenter new google.maps.LatLng cnt_lat, cnt_lng
+      @map.setZoom 13
 
   render: =>
     <section>
