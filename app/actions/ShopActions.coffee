@@ -84,6 +84,5 @@ module.exports =
       value: value
 
   searchByPrefecture: (value) ->
-    console.log value
     subjects.searchByKeywordSubjct.onNext
       value: value
