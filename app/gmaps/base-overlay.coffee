@@ -19,7 +19,7 @@ class BaseOverlay extends google.maps.OverlayView
 
     point = options.point
 
-    @el = options.el.cloneNode(true)
+    @el = options.el #.cloneNode(true)
 
     @point = new google.maps.LatLng(point.lat, point.lng)
 
