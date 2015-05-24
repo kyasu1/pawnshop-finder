@@ -12,14 +12,15 @@ class BaseOverlay extends google.maps.OverlayView
     offsetWidth = dimensions.width
 
     @el.style.top = projectedLatLng.y - offsetHeight + 'px'
-    @el.style.left = projectedLatLng.x - Math.floor(offsetWidth / 2) + 'px'
+    # @el.style.left = projectedLatLng.x - Math.floor(offsetWidth / 2) + 'px'
+    @el.style.left = projectedLatLng.x + 'px'
 
   constructor: (options) ->
     super()
 
     point = options.point
 
-    @el = options.el #.cloneNode(true)
+    @el = options.el
     @parent = @el.parentNode
 
     @point = new google.maps.LatLng(point.lat, point.lng)
