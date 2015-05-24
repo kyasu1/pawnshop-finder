@@ -20,18 +20,24 @@ class BaseOverlay extends google.maps.OverlayView
     point = options.point
 
     @el = options.el #.cloneNode(true)
+    @parent = @el.parentNode
 
     @point = new google.maps.LatLng(point.lat, point.lng)
 
     @el.style.position = 'absolute'
+
+  setPoint: (point) =>
+    @point = new google.maps.LatLng(point.lat, point.lng)
+    # @draw()
 
   onAdd: () =>
     panes = @getPanes()
     panes.overlayMouseTarget.appendChild(@el)
 
   onRemove: () =>
-    parentEl = @el.parentNode
-    parentEl.removeChild(@el)
+    @parent.appendChild(@el)
+    # parentEl = @el.parentNode
+    # parentEl.removeChild(@el)
 
   draw: () =>
     projection = @getProjection()

@@ -3,7 +3,6 @@ OverlayFactory = require('../gmaps/base-overlay-factory')
 
 class Overlay extends React.Component
   componentDidMount: =>
-    console.log "mount: ", @props.shop.get('title')
     element = React.findDOMNode(@)
 
     options =
@@ -16,19 +15,14 @@ class Overlay extends React.Component
     @overlayInstance = OverlayFactory.create options
 
   componentWillUnmount: =>
-    @overlayInstance.setMap(null)
     console.log "unmount: ", @props.shop.get('title')
+    # @overlayInstance.setMap(null)
 
-  componentWillUpdate: (nextProps, nextState) =>
-    console.log "update: ", nextProps.shop.get('title')
+  componentWillUpdate: =>
     @overlayInstance.setMap(null)
-    @overlayInstance.setPoint
-      lat: nextProps.shop.get('lat')
-      lng: nextProps.shop.get('lng')
-    @overlayInstance.setMap(@props.map)
-
+    
   handleClick: (e) =>
-    console.log 'click: ', @props.shop.get('title')
+    # console.log 'click: ', @props.shop.get('title')
 
   handleMouseOver: (e) =>
     # console.log 'mouseOver: ', e

@@ -75,12 +75,8 @@ class GMaps extends React.Component
     #   @map.setZoom 13
 
   render: =>
-    console.log "result: ", @props.result
-
     overlays = @props.result.map (shop, index) =>
       <Overlay key={index} map={@map} shop={shop} />
-
-    console.log overlays
 
     <section>
       <div>
