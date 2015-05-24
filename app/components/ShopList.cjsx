@@ -6,14 +6,14 @@ class ShopList extends React.Component
   constructor: (props) ->
     super()
 
-  handleClick: (e) ->
-    Actions.selectShop(e)
+  handleClick: (shop) ->
+    Actions.selectShop(shop)
 
   render: =>
     shops = []
     if @props.result.size > 0
       shops = @props.result.map (shop, index) =>
-        active = shop is @props.shop
+        active = shop.get('id') is @props.shop_id
         <ShopListItem key={index} shop={shop} active={active} onClick={@handleClick} />
     else
       shops = null

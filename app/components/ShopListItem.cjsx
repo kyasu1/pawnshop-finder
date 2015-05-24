@@ -1,7 +1,7 @@
 React = require('react')
 
 class ShopListItem extends React.Component
-  handleClick: (e) =>
+  handleClick: =>
     @props.onClick @props.shop
 
   render: =>
