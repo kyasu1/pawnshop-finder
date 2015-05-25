@@ -15,7 +15,7 @@ html, body, #main {
 
 #map-canvas {
   position: absolute;
-  top: 50px;
+  top: 100px;
   bottom: 50px;
   right: 0;
   left: 0; 
@@ -23,7 +23,7 @@ html, body, #main {
 }
 
 header {
-  height: 50px;
+  height: 10px;
   div {
     display: table-cell;
     vertical-align: middle;
@@ -56,11 +56,68 @@ footer {
 #shop_list {
   position: absolute;
   width: 300px;
-  height: 500px;
+  height: 80%;
   right: 50px;
   top: 100px;
   padding: 20px;
   z-index: 20;
   overflow-y: scroll;
   background-color: #fff;
+}
+
+ul.gnav {
+  display: table;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  li {
+    display: table-cell;
+    table-layout: fixed;
+    width: 20%;
+    text-align: center;
+    border-right: 1px solid #000;
+    &:last-of-type {
+      border: none;
+    }
+  }
+
+  a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    color: #000;
+    font-size: 12px;
+    &:hover {
+      background-color: #e0e0e0;
+    }
+    &:before {
+      display: block;
+      padding-bottom: 3px;
+      font-family: FontAwesome;
+      font-size: 22px;
+    }
+  }
+  .home:before {
+    content: '\f015'
+  }
+
+  .history:before {
+    content: '\f007'
+  }
+
+  .howto:before {
+    content: '\f040'
+  }
+
+  .news:before {
+    content: '\f03e'
+  }
+
+  .search:before {
+    content: '\f0e0'
+  }
 }

@@ -1,6 +1,7 @@
 React   = require('react')
 Rx      = require('rx')
 Header  = require('./Header')
+Nav     = require('./Nav')
 GMaps   = require('./GMaps')
 Footer  = require('./Footer')
 
@@ -64,6 +65,7 @@ class App extends React.Component
   render: =>
     <div className="container">
       <Header />
+      <Nav />
       <GMaps current={@state.current} {...@props}/>
       <Footer />
     </div>
