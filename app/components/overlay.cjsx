@@ -38,11 +38,34 @@ class Overlay extends React.Component
       isHovering: nextProps.active    
 
   componentWillUpdate: (nextProps, nextState) =>
-    @overlayInstance.setMap(null)
-    @overlayInstance.setPoint
-      lat: nextProps.shop.get('lat')
-      lng: nextProps.shop.get('lng')
-    @overlayInstance.setMap(@props.map)
+    if nextProps.shop.get('id') isnt @props.shop.get('idf')
+      @overlayInstance.setMap(null)
+      @overlayInstance.setPoint
+        lat: nextProps.shop.get('lat')
+        lng: nextProps.shop.get('lng')
+      @overlayInstance.setMap(@props.map)
+
+      title = @props.shop.get('title')
+      title_length = title.length * 15
+      total_length = title_length + 24
+      @hover_svg =
+        <svg width={total_length} height="24">
+          <g>
+            <circle id="trail-1" fill="#00407E" cx={title_length + 12} cy="12" r="12"></circle>
+            <circle id="trail-2" fill="#FFFFFF" cx={title_length + 12} cy="12" r="10"></circle>
+            <circle id="trail-3" fill="#00407E" cx={title_length + 12} cy="12" r="8"></circle>
+
+            <rect id="rect-1" fill="#00407E" x="12" y="0" width={title_length} height="24"></rect>
+            <rect id="rect-2" fill="#FFFFFF" x="12" y="2" width={title_length} height="20"></rect>
+            <rect id="rect-3" fill="#00407E" x="12" y="4" width={title_length} height="16"></rect>
+
+            <circle id="head-1" fill="#00407E" cx="12" cy="12" r="12"></circle>
+            <circle id="head-2" fill="#FFFFFF" cx="12" cy="12" r="10"></circle>
+            <circle id="head-3" fill="#00407E" cx="12" cy="12" r="8"></circle>
+            <text x="6.5" y="16" fill="#FFFFFF" fontSize="12">質</text>
+            <text x="26" y="16" fill="#FFFFFF" fontSize="12">{title}</text>
+          </g>
+        </svg>
 
   handleClick: (e) =>
     if @props.active is false
@@ -59,30 +82,8 @@ class Overlay extends React.Component
         isHovering: false
 
   render: =>
-    title = @props.shop.get('title')
-    title_length = title.length * 15
-    total_length = title_length + 24
-    hover_svg =
-      <svg width={total_length} height="24">
-        <g>
-          <circle id="trail-1" fill="#00407E" cx={title_length + 12} cy="12" r="12"></circle>
-          <circle id="trail-2" fill="#FFFFFF" cx={title_length + 12} cy="12" r="10"></circle>
-          <circle id="trail-3" fill="#00407E" cx={title_length + 12} cy="12" r="8"></circle>
-
-          <rect id="rect-1" fill="#00407E" x="12" y="0" width={title_length} height="24"></rect>
-          <rect id="rect-2" fill="#FFFFFF" x="12" y="2" width={title_length} height="20"></rect>
-          <rect id="rect-3" fill="#00407E" x="12" y="4" width={title_length} height="16"></rect>
-
-          <circle id="head-1" fill="#00407E" cx="12" cy="12" r="12"></circle>
-          <circle id="head-2" fill="#FFFFFF" cx="12" cy="12" r="10"></circle>
-          <circle id="head-3" fill="#00407E" cx="12" cy="12" r="8"></circle>
-          <text x="6.5" y="16" fill="#FFFFFF" fontSize="12">質</text>
-          <text x="26" y="16" fill="#FFFFFF" fontSize="12">{title}</text>
-        </g>
-      </svg>
-
     <div onClick={@handleClick} onMouseEnter={@handleMouseEnter} onMouseLeave={@handleMouseLeave}>
-      {if @state.isHovering then hover_svg else @normal_svg}
+      {if @state.isHovering then @hover_svg else @normal_svg}
     </div>
 
 module.exports = Overlay
