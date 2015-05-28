@@ -1,4 +1,5 @@
 React     = require('react')
+Radium    = require('radium')
 Rx        = require('rx')
 Actions   = require('../actions/ShopActions')
 Overlay   = require('./overlay')
@@ -53,7 +54,7 @@ class GMaps extends React.Component
       active = shop.get('id') is @props.shop_id
       <Overlay key={index} map={@map} shop={shop} active={active} />
 
-    <section id='body' style={@props.style}>
+    <section style={[styles.section, @props.style]}>
       <div>
         {overlays}
       </div>
@@ -61,4 +62,11 @@ class GMaps extends React.Component
       </div>
     </section>
 
-module.exports = GMaps
+styles =
+  section:
+    display: 'flex'
+    width: '100%'
+    height: '100%'
+    flex: '1 0 auto'
+
+module.exports = Radium.Enhancer(GMaps)

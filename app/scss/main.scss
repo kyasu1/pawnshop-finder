@@ -54,86 +54,86 @@ html, body, #main {
 //   }
 // }
 
-#shop_list {
-  position: absolute;
-  width: 300px;
-  height: 40%;
-  right: 50px;
-  top: 100px;
-  padding: 20px;
-  z-index: 20;
-  // overflow-y: scroll;
-  background-color: #fff;
-}
+// #shop_list {
+//   position: absolute;
+//   width: 300px;
+//   height: 40%;
+//   right: 50px;
+//   top: 100px;
+//   padding: 20px;
+//   z-index: 20;
+//   // overflow-y: scroll;
+//   background-color: #fff;
+// }
 
-@media screen and (max-width: 600px) {
-  #shop_list {
-    position: static;
-    width: 100%;
-    height: auto;
-    right: auto;
-    top: auto;
-    z-index: 20;
-    margin: 10px;
-    order: 4;
-  }
-}
+// @media screen and (max-width: 600px) {
+//   #shop_list {
+//     position: static;
+//     width: 100%;
+//     height: auto;
+//     right: auto;
+//     top: auto;
+//     z-index: 20;
+//     margin: 10px;
+//     order: 4;
+//   }
+// }
 
-ul.gnav {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-  list-style-type: none;
+// ul.gnav {
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+//   margin: 0;
+//   padding: 0;
+//   border-top: 1px solid #000;
+//   border-bottom: 1px solid #000;
+//   list-style-type: none;
 
-  li {
-    flex: 1;
-    text-align: center;
-    border-right: 1px solid #000;
-    &:last-of-type {
-      border: none;
-    }
-    a {
-      display: block;
-      padding: 10px 0;
-      text-decoration: none;
-      background-color: #f0f0f0;
-      color: #000;
-      font-size: 12px;
-      &:hover {
-        background-color: #e0e0e0;
-      }
-      &:before {
-        display: block;
-        padding-bottom: 3px;
-        font-family: FontAwesome;
-        font-size: 22px;
-      }
+//   li {
+//     flex: 1;
+//     text-align: center;
+//     border-right: 1px solid #000;
+//     &:last-of-type {
+//       border: none;
+//     }
+//     a {
+//       display: block;
+//       padding: 10px 0;
+//       text-decoration: none;
+//       background-color: #f0f0f0;
+//       color: #000;
+//       font-size: 12px;
+//       &:hover {
+//         background-color: #e0e0e0;
+//       }
+//       &:before {
+//         display: block;
+//         padding-bottom: 3px;
+//         font-family: FontAwesome;
+//         font-size: 22px;
+//       }
 
-  }
+//   }
 
 
-  }
-  .home:before {
-    content: '\f015';
-  }
+//   }
+//   .home:before {
+//     content: '\f015';
+//   }
 
-  .history:before {
-    content: '\f007';
-  }
+//   .history:before {
+//     content: '\f007';
+//   }
 
-  .howto:before {
-    content: '\f040';
-  }
+//   .howto:before {
+//     content: '\f040';
+//   }
 
-  .news:before {
-    content: '\f03e';
-  }
+//   .news:before {
+//     content: '\f03e';
+//   }
 
-  .search:before {
-    content: '\f0e0';
-  }
-}
+//   .search:before {
+//     content: '\f0e0';
+//   }
+// }

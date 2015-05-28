@@ -18,7 +18,7 @@ class ShopList extends React.Component
     else
       shops = null
 
-    <div>
+    <div style={{overflowY: 'scroll'; }}>
       <div className="list-group">
         {shops}
       </div>
