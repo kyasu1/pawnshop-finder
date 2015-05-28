@@ -2,10 +2,10 @@ React = require('react')
 
 class Footer extends React.Component
   render: =>
-    <footer>
+    <footer style={@props.style}>
       <div>
         <div>
-          Copyright 2015 Yasuyuki Komatsubara. All rights are reserved.
+          &copy; 2015 Yasuyuki Komatsubara. All rights are reserved.
         </div>
       </div>
     </footer>

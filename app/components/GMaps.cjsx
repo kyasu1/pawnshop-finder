@@ -53,11 +53,11 @@ class GMaps extends React.Component
       active = shop.get('id') is @props.shop_id
       <Overlay key={index} map={@map} shop={shop} active={active} />
 
-    <section>
+    <section id='body' style={@props.style}>
       <div>
         {overlays}
       </div>
-      <div id="map-canvas">
+      <div id="map-canvas" style={{flex: 1}}>
       </div>
     </section>
 

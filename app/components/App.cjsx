@@ -3,6 +3,7 @@ Rx      = require('rx')
 Header  = require('./Header')
 Nav     = require('./Nav')
 GMaps   = require('./GMaps')
+ShopFinder = require('./ShopFinder')
 Footer  = require('./Footer')
 
 # current = null
@@ -63,10 +64,47 @@ class App extends React.Component
     @stream.dispose()
 
   render: =>
-    <div className="container">
-      <Header />
-      <Nav />
-      <GMaps current={@state.current} {...@props}/>
-      <Footer />
+    styles =
+      container:
+        display: 'flex'
+        flexDirection: 'column'
+        backgroundColor: '#F9F9F9'
+        minHeight: '100%'
+
+      header:
+        width: '100%'
+        backgroundColor: 'white'
+        height: 30
+        padding: 10
+        textAlign: 'center'
+        order: 1
+
+      nav:
+        width: '100%'
+        backgroundColor: 'white'
+        height: 100
+        order: 2
+
+      map:
+        width: '100%'
+        flex: '1 0 auto'
+        order: 3
+        display: 'flex'
+
+      footer:
+        color: '#F9F9F9'
+        width: '100%'
+        height: 30
+        backgroundColor: '#444'
+        padding: 10
+        textAlign: 'center'
+        order: 5
+
+    <div className="container" style={styles.container} >
+      <Header style={styles.header} />
+      <Nav style={styles.nav} />
+      <GMaps style={styles.map} current={@state.current} {...@props}/>
+      <ShopFinder {...@props} />
+      <Footer style={styles.footer} />
     </div>
 module.exports = App

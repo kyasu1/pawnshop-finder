@@ -2,7 +2,7 @@ React = require('react')
 
 class Header extends React.Component
   render: =>
-    <header>
+    <header style={@props.style}>
       <div>
         <div>
           Pawnshop Finder in Saitama

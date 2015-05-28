@@ -1,32 +1,28 @@
 React       = require('react')
-Rx          = require('rx')
+# Rx          = require('rx')
 
 require './scss/main.scss'
 
 ShopData    = require('./ShopData')
 ShopStore   = require('./stores/ShopStore')
-
-GMaps       = require('./components/GMaps')
-ShopFinder  = require('./components/ShopFinder')
 App         = require('./components/App')
 
 Actions     = require('./actions/ShopActions')
 
-google.maps.event.addListenerAsObservable = (instance, eventName) ->
-  Rx.Observable.create (observer) ->
-    listener = google.maps.event.addListener(instance, eventName, (eventObject) =>
-      observer.onNext(eventObject)
-    )
+# google.maps.event.addListenerAsObservable = (instance, eventName) ->
+#   Rx.Observable.create (observer) ->
+#     listener = google.maps.event.addListener(instance, eventName, (eventObject) =>
+#       observer.onNext(eventObject)
+#     )
 
-    return () ->
-      google.maps.event.removeListener(listener)
+#     return () ->
+#       google.maps.event.removeListener(listener)
 
 ShopData.init()
 
 Actions.getShopsSubject()
 
 ShopStore.subject.subscribe (state) ->
-  React.render <ShopFinder {...state} />, document.getElementById('shop_list')
   React.render <App {...state} />, document.getElementById('main')
 
 # obserbableWatchPosition = ->

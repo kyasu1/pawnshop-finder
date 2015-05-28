@@ -2,7 +2,7 @@ React = require('react')
 
 class Nav extends React.Component
   render: =>
-    <nav>
+    <nav style={@props.style}>
       <ul className='gnav'>
         <li><a className='home' href='#'>ホーム</a></li>
         <li><a className='history' href='#'>歴史</a></li>
