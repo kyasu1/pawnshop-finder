@@ -61,10 +61,18 @@ var config = {
 
     {
       test: /\.scss$/,
-      loader: "style!css!sass?includePaths[]=" + 
-        path.resolve(__dirname, "./node_modules/bootstrap-sass/assets/stylesheets/")
-      // loader: "style!css!sass"
+      // loader: "style!css!sass?includePaths[]=" + 
+      //   path.resolve(__dirname, "./node_modules/bootstrap-sass/assets/stylesheets/")
+      loader: "style!css!sass"
     },
+    // {
+    //   test: /\.scss$/,
+    //   loader: "style!css!sass",
+    //   include: [
+    //     path.resolve(__dirname, "./node_modules/bootstrap-sass/assets/stylesheets/"),
+    //     path.resolve(__dirname, "./node_modules/santize.css/")
+    //   ]
+    // },
 
     {
       test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2$|\.eot$|\.ttf$/, loader: "file"
