@@ -58,15 +58,23 @@ class GMaps extends React.Component
       <div>
         {overlays}
       </div>
-      <div id="map-canvas" style={{flex: 1}}>
+      <div id="map-canvas" style={styles.mapCanvas}>
       </div>
     </section>
 
 styles =
   section:
-    display: 'flex'
+    position: 'relative'
+    flex: 1
+  mapCanvas:
+    position: 'absolute'
     width: '100%'
     height: '100%'
-    flex: '1 0 auto'
-
+    zIndex: 10
+    # position: 'absolute'
+    # top: '100px'
+    # bottom: '50px'
+    # right: 0
+    # left: 0 
+    # zIndex: 10
 module.exports = Radium.Enhancer(GMaps)

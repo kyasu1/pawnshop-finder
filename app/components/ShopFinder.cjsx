@@ -6,16 +6,17 @@ Radium = require('radium')
 
 styles = 
   shop_finder:
-    position: 'absolute'
-    width: '300px'
-    height: '40%'
-    right: '50px'
-    top: '100px'
-    padding: '5px'
-    zIndex: '20'
+    # position: 'absolute'
+    # width: '300px'
+    # height: '40%'
+    # right: '50px'
+    # top: '100px'
+    # padding: '5px'
+    # zIndex: '20'
     # overflowYy: scroll;
-    backgroundColor: '#fff'
-
+    # backgroundColor: '#fff'
+    backgroundColor: 'red'
+    flex: '0 0 18em'
     '@media screen and (max-width: 600px)':
       position: 'relative'
       # width: '100%'

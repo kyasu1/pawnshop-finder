@@ -68,32 +68,16 @@ class App extends React.Component
       container:
         display: 'flex'
         flexDirection: 'column'
+        minHeight: '100vh'
         backgroundColor: '#F9F9F9'
-        minHeight: '100%'
-
-      header:
-        order: 1
-
-      nav:
-        order: 2
-
-      map:
-        order: 3
-        flex: 1
-
-      shop_finder:
-        order: 4
-
-      footer:
-        order: 5
 
     <div className="container" style={styles.container} >
-      <Header style={styles.header} />
-      <Nav style={styles.nav} />
-      <div style={{display: 'flex'}}>
-        <GMaps style={styles.map} current={@state.current} {...@props}/>
+      <Header />
+      <Nav />
+      <div style={{display: 'flex', flex: 1}}>
+        <GMaps current={@state.current} {...@props}/>
         <ShopFinder {...@props} />
       </div>
-      <Footer style={styles.footer} />
+      <Footer />
     </div>
 module.exports = App
