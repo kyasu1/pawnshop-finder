@@ -6,34 +6,25 @@ Radium = require('radium')
 
 styles = 
   shop_finder:
-    # position: 'absolute'
-    # width: '300px'
-    # height: '40%'
-    # right: '50px'
-    # top: '100px'
-    # padding: '5px'
-    # zIndex: '20'
-    # overflowYy: scroll;
-    # backgroundColor: '#fff'
-    backgroundColor: 'red'
-    flex: '0 0 18em'
-    '@media screen and (max-width: 600px)':
-      position: 'relative'
-      # width: '100%'
-      height: 'auto'
-      right: 'auto'
-      top: 'auto'
-      zIndex: 'auto'
-      margin: '10px'
-      padding: '5px'
-      order: '4'
+    backgroundColor: '#F0F0F0'
+    borderLeft: '1px solid #333'
+    padding: '10px'
+    maxHeight: '20vh'
+    overflow: 'hidden'
+    
+    display: 'flex'
+    flexDirection: 'column'
+
+    '@media screen and (min-width: 600px)':
+      flex: '0 0 18em'
+      maxHeight: '60vh'
   tabs:
     display: 'flex'
     justifyContent: 'space-between'
   tab_label:
     flex: 1
     border: 'solid 1px #333'
-    padding: '1px 1px'
+    borderRight: 'none'
     textAlign: 'center'
 
 class ShopFinder extends React.Component
@@ -44,13 +35,13 @@ class ShopFinder extends React.Component
 
   render: =>
     <aside style={styles.shop_finder} >
-      <div className="panel-heading text-center">質屋検索</div>
+      <div>質屋検索</div>
       <div style={styles.tabs}>
         <label for="tab1" id="tab1-label" style={styles.tab_label}>キーワード</label>
         <label for="tab2" id="tab2-label" style={styles.tab_label}>都道府県</label>
-        <label for="tab3" id="tab3-label" style={styles.tab_label}>路線</label>
+        <label for="tab3" id="tab3-label" style={[styles.tab_label, {borderRight: 'solid 1px #333'}]}>路線</label>
       </div>
-      <div className="panel-body">
+      <div>
         <ShopSearch {...@props} />
         <SearchByPrefecture {...@props} />
       </div>

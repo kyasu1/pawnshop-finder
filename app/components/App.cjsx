@@ -5,6 +5,7 @@ Nav     = require('./Nav')
 GMaps   = require('./GMaps')
 ShopFinder = require('./ShopFinder')
 Footer  = require('./Footer')
+Radium  = require('radium')
 
 # current = null
 # if navigator.geolocation
@@ -69,15 +70,29 @@ class App extends React.Component
         display: 'flex'
         flexDirection: 'column'
         minHeight: '100vh'
+        # height: '100vh'
         backgroundColor: '#F9F9F9'
+      header:
+        flex: '1 100%'
+      nav:
+        flex: '1 100%'
+      content:
+        flex: 4
+        display: 'flex'
+        flexDirection: 'column'
+        '@media screen and (min-width: 600px)':
+          flexDirection: 'row'
+          # justifyContent: 'space-between'
+      footer:
+        flex: '1 100%'
 
     <div className="container" style={styles.container} >
-      <Header />
-      <Nav />
-      <div style={{display: 'flex', flex: 1}}>
+      <Header style={styles.header} />
+      <Nav style={styles.nav} />
+      <div style={styles.content}>
         <GMaps current={@state.current} {...@props}/>
         <ShopFinder {...@props} />
       </div>
-      <Footer />
+      <Footer style={styles.footer} />
     </div>
-module.exports = App
+module.exports = Radium.Enhancer(App)

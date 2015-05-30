@@ -20,11 +20,13 @@ styles =
     width: '100%'
     height: 30
     backgroundColor: '#444'
-    padding: 10
+    padding: '10px 0'
     textAlign: 'center'
-    '@media screen and (max-width: 600px)':
-      fontSize: '10'
-      flexDirection: 'column'
 
+    fontSize: '10'
+    flexDirection: 'column'
+    '@media screen and (min-width: 600px)':
+      flexDirection: 'row'
+      fontSize: '14'
 
 module.exports = Radium.Enhancer(Footer)

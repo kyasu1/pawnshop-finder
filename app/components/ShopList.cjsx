@@ -1,6 +1,7 @@
 React         = require('react')
 ShopListItem  = require('./ShopListItem')
 Actions       = require('../actions/ShopActions')
+Radium        = require('radium')
 
 class ShopList extends React.Component
   constructor: (props) ->
@@ -18,10 +19,17 @@ class ShopList extends React.Component
     else
       shops = null
 
-    <div style={{overflowY: 'scroll'; }}>
-      <div className="list-group">
-        {shops}
-      </div>
-    </div>
+    <ul style={styles.list}>
+      {shops}
+    </ul>
 
-module.exports = ShopList
+styles =
+  list:
+    flex: 1
+    height: '100%'
+    listStyleType: 'none'
+    overflowY: 'scroll'
+    # '@media screen and (min-width: 600px)':
+    #   flexDirection: 'column'
+
+module.exports = Radium.Enhancer(ShopList)

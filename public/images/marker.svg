@@ -4,8 +4,10 @@
     <title>marker</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
+
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
         <g id="marker" sketch:type="MSLayerGroup">
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 23 23" to="360 23 23" begin="0s" dur="2s" repeatCount="indefinite"/>
             <circle id="Oval-2" fill="#00407E" sketch:type="MSShapeGroup" cx="23" cy="23" r="23"></circle>
             <circle id="Oval-3" fill="#FFFFFF" sketch:type="MSShapeGroup" cx="23" cy="23" r="19"></circle>
             <circle id="Oval-4" fill="#00407E" sketch:type="MSShapeGroup" cx="23" cy="23" r="16"></circle>

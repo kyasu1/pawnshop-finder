@@ -66,11 +66,12 @@ styles =
   section:
     position: 'relative'
     flex: 1
+
   mapCanvas:
     position: 'absolute'
     width: '100%'
     height: '100%'
-    zIndex: 10
+    # zIndex: 10
     # position: 'absolute'
     # top: '100px'
     # bottom: '50px'
