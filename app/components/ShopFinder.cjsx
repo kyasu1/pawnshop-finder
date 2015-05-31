@@ -9,15 +9,19 @@ styles =
     backgroundColor: '#F0F0F0'
     borderLeft: '1px solid #333'
     padding: '10px'
-    maxHeight: '20vh'
-    overflow: 'hidden'
-    
+    # height: '50vh'
+
+    # minHeight: '40vh'
+    # overflow: 'hidden'
+    flex: '0 0 40vh'    
     display: 'flex'
     flexDirection: 'column'
 
     '@media screen and (min-width: 600px)':
       flex: '0 0 18em'
-      maxHeight: '60vh'
+      height: null
+      minHeight: null
+      # maxHeight: '100%'
   tabs:
     display: 'flex'
     justifyContent: 'space-between'

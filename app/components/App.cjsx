@@ -73,18 +73,17 @@ class App extends React.Component
         # height: '100vh'
         backgroundColor: '#F9F9F9'
       header:
-        flex: '1 100%'
+        flex: '0 0 100%'
       nav:
-        flex: '1 100%'
+        flex: '0 0 100%'
       content:
-        flex: 4
+        flex: 1
         display: 'flex'
         flexDirection: 'column'
         '@media screen and (min-width: 600px)':
           flexDirection: 'row'
-          # justifyContent: 'space-between'
       footer:
-        flex: '1 100%'
+        flex: '0 0 100%'
 
     <div className="container" style={styles.container} >
       <Header style={styles.header} />

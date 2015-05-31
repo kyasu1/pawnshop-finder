@@ -26,8 +26,12 @@ class ShopList extends React.Component
 styles =
   list:
     flex: 1
-    height: '100%'
+    # height: '100%'
     listStyleType: 'none'
+    minHeight: '40px'
+    height: '40px'
+    maxHeight: 'auto'
+    overflow: 'hidden'
     overflowY: 'scroll'
     # '@media screen and (min-width: 600px)':
     #   flexDirection: 'column'

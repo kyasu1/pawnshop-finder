@@ -16,6 +16,7 @@ styles =
     display: 'flex'
     flexDirection: 'row'
     height: 40
+    minHeight: 40
     margin: 0
     padding: 0
     borderTop: '1px solid #000'

@@ -9,7 +9,8 @@ class Header extends React.Component
       header:
         # width: '100%'
         backgroundColor: 'white'
-        height: 30
+        height: 20
+        minHeight: 20
         padding: 10
         textAlign: 'center'  
 

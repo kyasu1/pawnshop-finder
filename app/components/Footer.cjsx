@@ -19,6 +19,7 @@ styles =
     color: '#F9F9F9'
     width: '100%'
     height: 30
+    minHeight: 30
     backgroundColor: '#444'
     padding: '10px 0'
     textAlign: 'center'
