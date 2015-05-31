@@ -16,8 +16,13 @@ class Input extends React.Component
     @keyupStream.dispose()
 
   render: =>
+    styles =
+      input:
+        background: '#FFFFFF'
+        border: '1px solid #DCD8D3'
+        borderRadius: '2px'
     <div>
-      <input type="text" ref="input" className={@props.className} />
+      <input style={styles.input} type="text" ref="input" className={@props.className} />
     </div>
 
 module.exports = Input
