@@ -24,7 +24,7 @@ styles =
     textAlign: 'center'
 
   item:
-    flex: 1
+    flex: '1 0 0%'
     backgroundColor: '#f0f0f0'
     color: '#333'
     borderRight: '1px solid #333'

@@ -9,6 +9,8 @@ App         = require('./components/App')
 
 Actions     = require('./actions/ShopActions')
 
+React.initializeTouchEvents(true)
+
 # google.maps.event.addListenerAsObservable = (instance, eventName) ->
 #   Rx.Observable.create (observer) ->
 #     listener = google.maps.event.addListener(instance, eventName, (eventObject) =>

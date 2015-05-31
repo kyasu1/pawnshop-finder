@@ -46,8 +46,14 @@ class GMaps extends React.Component
       cnt_lat = (max_lat.toJS().lat + min_lat.toJS().lat) * 0.5
       cnt_lng = (max_lng.toJS().lng + min_lng.toJS().lng) * 0.5
 
-      @map.setCenter new google.maps.LatLng cnt_lat, cnt_lng
-      @map.setZoom 13
+      sw = new google.maps.LatLng min_lat.get('lat'), min_lng.get('lng')
+      ne = new google.maps.LatLng max_lat.get('lat'), max_lng.get('lng')
+      bounds = new google.maps.LatLngBounds sw, ne
+      @map.fitBounds bounds
+      if @map.getZoom() > 15
+        @map.setZoom 15
+      # @map.setCenter new google.maps.LatLng cnt_lat, cnt_lng
+      # @map.setZoom 13
 
   render: =>
     overlays = @props.result.map (shop, index) =>
@@ -65,17 +71,12 @@ class GMaps extends React.Component
 styles =
   section:
     position: 'relative'
-    flex: 1
+    flex: '1 0 0%'
 
   mapCanvas:
     position: 'absolute'
+    minHeight: '30vh'
     width: '100%'
     height: '100%'
-    # zIndex: 10
-    # position: 'absolute'
-    # top: '100px'
-    # bottom: '50px'
-    # right: 0
-    # left: 0 
-    # zIndex: 10
+
 module.exports = Radium.Enhancer(GMaps)

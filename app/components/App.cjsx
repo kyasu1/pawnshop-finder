@@ -70,14 +70,13 @@ class App extends React.Component
         display: 'flex'
         flexDirection: 'column'
         minHeight: '100vh'
-        # height: '100vh'
         backgroundColor: '#F9F9F9'
       header:
         flex: '0 0 100%'
       nav:
         flex: '0 0 100%'
       content:
-        flex: 1
+        flex: '1 0 0%'
         display: 'flex'
         flexDirection: 'column'
         '@media screen and (min-width: 600px)':

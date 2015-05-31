@@ -3,7 +3,8 @@ ShopSearch = require('./ShopSearch')
 ShopList = require('./ShopList')
 SearchByPrefecture = require('./SearchByPrefecture')
 Radium = require('radium')
-
+TabGroup = require('./TabGroup')
+Tab = require('./Tab')
 styles = 
   shop_finder:
     backgroundColor: '#F0F0F0'
@@ -26,7 +27,7 @@ styles =
     display: 'flex'
     justifyContent: 'space-between'
   tab_label:
-    flex: 1
+    flex: '1 0 0%'
     border: 'solid 1px #333'
     borderRight: 'none'
     textAlign: 'center'
@@ -40,15 +41,18 @@ class ShopFinder extends React.Component
   render: =>
     <aside style={styles.shop_finder} >
       <div>質屋検索</div>
-      <div style={styles.tabs}>
-        <label for="tab1" id="tab1-label" style={styles.tab_label}>キーワード</label>
-        <label for="tab2" id="tab2-label" style={styles.tab_label}>都道府県</label>
-        <label for="tab3" id="tab3-label" style={[styles.tab_label, {borderRight: 'solid 1px #333'}]}>路線</label>
-      </div>
-      <div>
-        <ShopSearch {...@props} />
-        <SearchByPrefecture {...@props} />
-      </div>
+
+      <TabGroup>
+        <Tab title='キーワード'>
+          <ShopSearch {...@props} />
+        </Tab>
+        <Tab title='都道府県'>
+          <SearchByPrefecture {...@props} />
+        </Tab>
+        <Tab title='路線'>
+        </Tab>
+      </TabGroup>
+
       <ShopList {...@props} />
     </aside>
 
