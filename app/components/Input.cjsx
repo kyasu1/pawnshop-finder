@@ -1,4 +1,5 @@
 React = require('react')
+Radium = require('radium')
 
 class Input extends React.Component
   componentDidMount: =>
@@ -22,7 +23,7 @@ class Input extends React.Component
         border: '1px solid #DCD8D3'
         borderRadius: '2px'
     <div>
-      <input style={styles.input} type="text" ref="input" className={@props.className} />
+      <input style={[styles.input, @props.style]} type="text" ref="input" className={@props.className} placeholder={@props.placeholder} />
     </div>
 
-module.exports = Input
+module.exports = Radium.Enhancer(Input)

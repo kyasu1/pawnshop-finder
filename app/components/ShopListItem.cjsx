@@ -6,42 +6,43 @@ class ShopListItem extends React.Component
     @props.onClick @props.shop
 
   render: =>
-    shop = null
+    title = <h4 style={styles.title}>{@props.shop.get('title')}</h4>
+
+    details = null
     className = "list-group-item "
     if @props.active
       href = "tel:" + @props.shop.get('tel')
-      shop =
+      details =
         <div>
-          <h4 style={styles.title}><a href='#'>{@props.shop.get('title')}</a></h4>
           <p>{@props.shop.get('prefecture') + @props.shop.get('city') + @props.shop.get('street')}</p>
-          <a href={href}>{@props.shop.get('tel')}</a>
+          <a style={{textDecoration: 'none'}} href={href}>{@props.shop.get('tel')}</a>
         </div>
-      className += " active"
       styles.item.flex = 2
       styles.item.order = 0
     else
-      shop =
-        <div>
-          <h4 style={styles.title}><a href='#'>{@props.shop.get('title')}</a></h4>
-        </div>
       styles.item.flex = 1
       styles.item.order = @props.shop.get('id')
 
-    <li style={styles.item} href="#" onClick={@handleClick} className={className}>
-      {shop}
+    <li style={styles.item} onClick={@handleClick}>
+      <div>
+        {title}
+        {details}
+      </div>
     </li>
 
 styles = 
   item:
-    margin: '10px'
-    borderRadius: '5px'
-    background: '#60B99A'
-    color: '#FFF'
-    padding: '15px'
+    # margin: '10px'
+    borderBottom: '1px solid #111'
+    backgroundColor: '#FFF'
+    color: '#111'
+    padding: '5px'
     textDecoration: 'none'
     ':hover':
-      backgroundColor: '#F9F9F9'
+      color: '#7F0019'
+      backgroundColor: '#EEE'
   title:
     margin: '11px 0 0 0'
+    textDecoration: 'none'
       
 module.exports = Radium.Enhancer(ShopListItem)

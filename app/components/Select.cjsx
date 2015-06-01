@@ -21,7 +21,7 @@ class Select extends React.Component
     styles =
       div:
         display: 'flex'
-        width: '200px'
+        width: '100%'
       select:
         flex: '1 0 0%'
         appearance: 'none'
@@ -29,17 +29,19 @@ class Select extends React.Component
         border: '1px solid #DCD8D3'
         borderRight: 'none'
         borderRadius: '4px 0 0 4px'
+        fontSize: '14px'
       span:
         padding: '5px 5px 5px 5px'
         backgroundColor: '#FFFFFF'
         border: '1px solid #DCD8D3'
         borderRadius: '0 4px 4px 0'
+        fontSize: '14px'
 
     <div style={styles.div}>
       <select style={styles.select} ref="select" className={@props.className} >
         {@props.children}
       </select>
-      <span style={styles.span}>下</span>
+      <span style={styles.span}><i class="fa fa-sort-desc">Ｖ</i></span>
     </div>
 
 module.exports = Radium.Enhancer(Select)

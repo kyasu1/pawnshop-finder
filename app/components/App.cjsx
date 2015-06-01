@@ -93,4 +93,5 @@ class App extends React.Component
       </div>
       <Footer style={styles.footer} />
     </div>
+
 module.exports = Radium.Enhancer(App)

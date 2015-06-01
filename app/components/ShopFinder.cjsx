@@ -7,7 +7,8 @@ TabGroup = require('./TabGroup')
 Tab = require('./Tab')
 styles = 
   shop_finder:
-    backgroundColor: '#F0F0F0'
+    display: 'flex'
+    backgroundColor: '#FFF'
     borderLeft: '1px solid #333'
     padding: '10px'
     # height: '50vh'
@@ -15,34 +16,32 @@ styles =
     # minHeight: '40vh'
     # overflow: 'hidden'
     flex: '0 0 40vh'    
-    display: 'flex'
     flexDirection: 'column'
 
     '@media screen and (min-width: 600px)':
       flex: '0 0 18em'
       height: null
-      minHeight: null
-      # maxHeight: '100%'
-  tabs:
-    display: 'flex'
-    justifyContent: 'space-between'
-  tab_label:
-    flex: '1 0 0%'
-    border: 'solid 1px #333'
-    borderRight: 'none'
-    textAlign: 'center'
 
+  h3: 
+    flex: '0 0 14px'
+    textAlign: 'center'
+    margin: 0
+    padding: 0
+    fontSize: 14
+
+  tabgroup:
+    flex: '0 0 100px'
+
+  shoplist:
+    flex: 1
 class ShopFinder extends React.Component
   displayName: 'ShopFinder'
 
-  constructor: (props) ->
-    console.log props
-
   render: =>
     <aside style={styles.shop_finder} >
-      <div>質屋検索</div>
+      <h3 style={styles.h3}>質屋検索</h3>
 
-      <TabGroup>
+      <TabGroup style={styles.tabgroup} >
         <Tab title='キーワード'>
           <ShopSearch {...@props} />
         </Tab>
@@ -53,7 +52,7 @@ class ShopFinder extends React.Component
         </Tab>
       </TabGroup>
 
-      <ShopList {...@props} />
+      <ShopList {...@props} style={styles.shoplist}/>
     </aside>
 
 module.exports = Radium.Enhancer(ShopFinder)

@@ -4,8 +4,6 @@ Input     = require('./Input')
 
 class ShopSearch extends React.Component
   render: =>
-    <div className="input-group">
-      <Input action={Actions.searchByKeyword} className="form-control" />
-    </div>
+    <Input action={Actions.searchByKeyword} style={{width: '100%'}} placeholder='キーワードを入力' />
 
 module.exports = ShopSearch
