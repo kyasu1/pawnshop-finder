@@ -4,7 +4,7 @@ Radium = require('radium')
 class Nav extends React.Component
   render: =>
     <nav style={[@props.style, styles.nav]}>
-      <div key=1 style={styles.item}><a className='home' href='#'>ホーム</a></div>
+      <div key=1 style={styles.item}><i class="fa fa-home"></i><a className='home' href='#'>ホーム</a></div>
       <div key=2 style={styles.item}><a className='history' href='#'>組合の歴史</a></div>
       <div key=3 style={styles.item}><a className='howto' href='#'>質屋の仕組</a></div>
       <div key=4 style={styles.item}><a className='news' href='#'>お知らせ</a></div>
